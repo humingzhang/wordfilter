@@ -11,9 +11,7 @@
 # 预览 #
 
 
-/**
- * 测试替换过滤词
- */
+* 测试替换过滤词
 ```
 @Test
 public void replace0() {
@@ -30,9 +28,7 @@ public void replace0() {
 } 
 ```
 
-/**
- * 测试是否包含过滤词
- */
+* 测试是否包含过滤词
 ```
 @Test
 public void include0() {
@@ -49,9 +45,7 @@ public void include0() {
 }
 ```
 
-/**
- * 获取过滤词数
- */
+* 获取过滤词数
 ```
 @Test
 public void wordcount0() {
@@ -68,9 +62,7 @@ public void wordcount0() {
 }
 ```
 
-/**
- * 获取过滤词列表
- */
+* 获取过滤词列表
 ```
 @Test
 public void wordlist0() {
