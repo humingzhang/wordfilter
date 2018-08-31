@@ -1,8 +1,10 @@
-package org.startx.startx.wordfilter;
+package com.startx.http.wordfilter;
 
 import java.util.List;
 
 import org.junit.Test;
+
+import com.startx.http.wordfilter.WordFilter;
 
 /**
  * Unit test for simple App.

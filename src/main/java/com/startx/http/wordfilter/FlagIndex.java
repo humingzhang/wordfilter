@@ -1,4 +1,4 @@
-package org.startx.startx.wordfilter;
+package com.startx.http.wordfilter;
 
 import java.util.List;
 
