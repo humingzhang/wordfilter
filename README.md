@@ -10,10 +10,11 @@
 
 # 预览 #
 
-```
+
 /**
  * 测试替换过滤词
  */
+```
 @Test
 public void replace0() {
 	{
@@ -27,10 +28,12 @@ public void replace0() {
 		System.out.println(result);		//我们家旁边住了一个*大*，我还认识一个自称*黑*的人
 	}
 } 
+```
 
 /**
  * 测试是否包含过滤词
  */
+```
 @Test
 public void include0() {
 	{
@@ -44,10 +47,12 @@ public void include0() {
 		System.out.println(result);        //true
 	}
 }
+```
 
 /**
  * 获取过滤词数
  */
+```
 @Test
 public void wordcount0() {
 	{
@@ -61,10 +66,12 @@ public void wordcount0() {
 		System.out.println(result);        //2
 	}
 }
+```
 
 /**
  * 获取过滤词列表
  */
+```
 @Test
 public void wordlist0() {
 	{
@@ -78,6 +85,5 @@ public void wordlist0() {
 		System.out.println(words);        //[张三, 大侠]
 	}
 }
-
 ```
 
