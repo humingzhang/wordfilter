@@ -18,6 +18,35 @@
 - 2  匹配张三，张x三，张xx三
 
 
+## 在线体验 ##
+
+
+###REQUEST###
+```
+POST http://wf.instanceof.cn/word/filter
+{
+	"text":"我想说一句骂人的话",              //待检测文本     
+	"distence":2,                           //文本距离，默认为0
+	"replace":"*"                           //替换符号，默认为*
+}
+```
+###RESPONSE###
+```
+{
+    "code": {
+        "msg": "successful",
+        "code": 200
+    },
+    "data": {
+        "include": false,
+        "wordlist": [],
+        "replace": "我想说一句骂人的话",
+        "count": 0
+    }
+}
+```
+
+
 ## 预览 ##
 
 
