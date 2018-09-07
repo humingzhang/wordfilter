@@ -1,4 +1,4 @@
-## 功能（http://wf.instanceof.cn） ##
+## 功能 (http://wf.instanceof.cn) ##
 
 1. 敏感词替换
 
