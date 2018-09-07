@@ -8,7 +8,7 @@
 
 4. 获取过滤词列表
 
-## Distance ##
+## DISTENCE ##
 
 程序会根据不同的距离，查找敏感词，距离越长，过滤越严格，效率越低，开发者可以根据具体需求设置，这里以“张三”为敏感词举例，以此类推
 
@@ -21,7 +21,7 @@
 ## 在线体验 ##
 
 
-###REQUEST###
+### REQUEST ###
 ```
 POST http://wf.instanceof.cn/word/filter
 {
@@ -30,7 +30,7 @@ POST http://wf.instanceof.cn/word/filter
 	"replace":"*"                           //替换符号，默认为*
 }
 ```
-###RESPONSE###
+### RESPONSE ###
 ```
 {
     "code": {
