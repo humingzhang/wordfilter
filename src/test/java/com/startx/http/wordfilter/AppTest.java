@@ -15,14 +15,14 @@ public class AppTest {
     @Test
     public void replace() {
         {
-            String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
+            String text   = "我们决定紧急征调5000人前往宅区帮助灾民，并且决定为紧急事件打开绿灯";
             String result = WordFilter.replace(text, 0, '*');
-            System.out.println(result);		//我小时候有个朋友叫**，现在和他几乎没联系了
+            System.out.println(result);		//我们决定**征调5000人前往宅区帮助灾民，并且决定为紧急事件打开绿灯
         }
         {
-            String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
+            String text   = "我们决定紧x急征调5000人前往宅区帮助灾民，并且决定为紧急x事件打开绿灯";
             String result = WordFilter.replace(text, 1, '*');
-            System.out.println(result);		//我小时候有个朋友叫*大*，现在和他几乎没联系了
+            System.out.println(result);		//我们决定*x*征调5000人前往宅区帮助灾民，并且决定为**x事件打开绿灯
         }
     }
 

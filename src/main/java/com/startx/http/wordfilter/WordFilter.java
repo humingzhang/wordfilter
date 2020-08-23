@@ -116,16 +116,21 @@ public class WordFilter {
             if (count > distance || (i == begin && Objects.isNull(mapTree))) {
                 break;
             }
-            if (!Objects.isNull(mapTree)) {
+            if (Objects.nonNull(mapTree)) {
                 nowMap = mapTree;
                 count = 0;
                 index.add(i);
             } else {
                 count++;
+                if(flag) {
+                    break;
+                }
             }
             if ("1".equals(nowMap.get("isEnd"))) {
                 flag = true;
-                break;
+            }
+            if("1".equals(nowMap.get("isWhiteWord"))) {
+                flag = false;
             }
         }
 
