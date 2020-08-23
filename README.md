@@ -26,14 +26,14 @@
 @Test
 public void replace0() {
 	{
-		String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
+		String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
 		String result = WordFilter.replace(text, 0, '*');
-		System.out.println(result);		//我们家旁边住了一个**，我还认识一个自称**的人
+		System.out.println(result);		//我小时候有个朋友叫**，现在和他几乎没联系了
 	}
 	{
-		String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
+		String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
 		String result = WordFilter.replace(text, 1, '*');
-		System.out.println(result);		//我们家旁边住了一个*大*，我还认识一个自称*黑*的人
+		System.out.println(result);		//我小时候有个朋友叫*大*，现在和他几乎没联系了
 	}
 } 
 ```
@@ -43,12 +43,12 @@ public void replace0() {
 @Test
 public void include0() {
 	{
-		String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
+		String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
 		boolean result = WordFilter.include(text, 0);
 		System.out.println(result);        //true
 	}
 	{
-		String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
+		String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
 		boolean result = WordFilter.include(text, 1);
 		System.out.println(result);        //true
 	}
@@ -60,14 +60,14 @@ public void include0() {
 @Test
 public void wordcount0() {
 	{
-		String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
+		String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
 		int result = WordFilter.wordcount(text, 0);
-		System.out.println(result);        //2
+		System.out.println(result);        //1
 	}
 	{
-		String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
+		String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
 		int result = WordFilter.wordcount(text, 1);
-		System.out.println(result);        //2
+		System.out.println(result);        //1
 	}
 }
 ```
@@ -77,14 +77,14 @@ public void wordcount0() {
 @Test
 public void wordlist0() {
 	{
-		String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
+		String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
 		List<String> words = WordFilter.wordlist(text, 0);
-		System.out.println(words);        //[张三, 大侠]
+		System.out.println(words);        //[张三]
 	}
 	{
-		String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
+		String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
 		List<String> words = WordFilter.wordlist(text, 1);
-		System.out.println(words);        //[张三, 大侠]
+		System.out.println(words);        //[张三]
 	}
 }
 ```
