@@ -1,10 +1,8 @@
 package com.startx.http.wordfilter;
 
-import java.util.List;
-
 import org.junit.Test;
 
-import com.startx.http.wordfilter.WordFilter;
+import java.util.List;
 
 /**
  * Unit test for simple App.
@@ -14,69 +12,69 @@ public class AppTest {
 	/**
 	 * 测试替换过滤池
 	 */
-	@Test
-	public void replace0() {
-		{
-			String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
-			String result = WordFilter.replace(text, 0, '*');
-			System.out.println(result);		//我们家旁边住了一个**，我还认识一个自称**的人
-		}
-		{
-			String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
-			String result = WordFilter.replace(text, 1, '*');
-			System.out.println(result);		//我们家旁边住了一个*大*，我还认识一个自称*黑*的人
-		}
-	} 
-	
-	/**
+    @Test
+    public void replace() {
+        {
+            String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
+            String result = WordFilter.replace(text, 0, '*');
+            System.out.println(result);		//我小时候有个朋友叫**，现在和他几乎没联系了
+        }
+        {
+            String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
+            String result = WordFilter.replace(text, 1, '*');
+            System.out.println(result);		//我小时候有个朋友叫*大*，现在和他几乎没联系了
+        }
+    }
+
+    /**
 	 * 测试是否包含过滤池
 	 */
-	@Test
-	public void include0() {
-		{
-			String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
-			boolean result = WordFilter.include(text, 0);
-			System.out.println(result);        //true
-		}
-		{
-			String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
-			boolean result = WordFilter.include(text, 1);
-			System.out.println(result);        //true
-		}
-	}
+    @Test
+    public void include() {
+        {
+            String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
+            boolean result = WordFilter.include(text, 0);
+            System.out.println(result);        //true
+        }
+        {
+            String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
+            boolean result = WordFilter.include(text, 1);
+            System.out.println(result);        //true
+        }
+    }
 	
 	/**
 	 * 获取过滤词数
 	 */
-	@Test
-	public void wordcount0() {
-		{
-			String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
-			int result = WordFilter.wordcount(text, 0);
-			System.out.println(result);        //2
-		}
-		{
-			String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
-			int result = WordFilter.wordcount(text, 1);
-			System.out.println(result);        //2
-		}
-	}
+    @Test
+    public void wordCount() {
+        {
+            String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
+            int result = WordFilter.wordCount(text, 0);
+            System.out.println(result);        //1
+        }
+        {
+            String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
+            int result = WordFilter.wordCount(text, 1);
+            System.out.println(result);        //1
+        }
+    }
 	
 	/**
 	 * 获取过滤词列表
 	 */
-	@Test
-	public void wordlist0() {
-		{
-			String text   = "我们家旁边住了一个张三，我还认识一个自称大侠的人";
-			List<String> words = WordFilter.wordlist(text, 0);
-			System.out.println(words);        //[张三, 大侠]
-		}
-		{
-			String text   = "我们家旁边住了一个张大三，我还认识一个自称大黑侠的人";
-			List<String> words = WordFilter.wordlist(text, 1);
-			System.out.println(words);        //[张三, 大侠]
-		}
-	}
+    @Test
+    public void wordList() {
+        {
+            String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
+            List<String> words = WordFilter.wordList(text, 0);
+            System.out.println(words);        //[张三]
+        }
+        {
+            String text   = "我小时候有个朋友叫张大三，现在和他几乎没联系了";
+            List<String> words = WordFilter.wordList(text, 1);
+            System.out.println(words);        //[张三]
+        }
+    }
 	
 }
