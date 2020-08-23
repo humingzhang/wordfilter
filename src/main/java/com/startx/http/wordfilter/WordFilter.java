@@ -15,7 +15,7 @@ public class WordFilter {
     /**
      * 初始化敏感词库
      */
-    private static Map sensitiveWordMap = new WordContext().initKeyWord();
+    private static Map sensitiveWordMap = WordContext.getInstance().initKeyWord();
 
     /**
      * 替换敏感词

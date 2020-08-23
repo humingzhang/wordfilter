@@ -13,22 +13,55 @@ import java.util.Set;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class WordContext {
 
+    private static final WordContext context = new WordContext();
 
-    private Map sensitiveWordMap;
+    /**
+     * 敏感词字典
+     */
+    private final Map sensitiveWordMap = new HashMap(1024);
+
+    /**
+     * 是否已初始化
+     */
+    private boolean init;
+
+
+    private WordContext() {
+    }
+
+    /**
+     * 获取WordContext
+     */
+    public static WordContext getInstance() {
+        return context;
+    }
 
     /**
      * 初始化
      */
-    public Map initKeyWord() {
+    public synchronized Map initKeyWord() {
         try {
-            // 将敏感词库加入到HashMap中
-            addSensitiveWordToHashMap(readWordFile("/blacklist.txt"), false);
-            // 将非敏感词库也加入到HashMap中
-            addSensitiveWordToHashMap(readWordFile("/whitelist.txt"), true);
+            if (!init) {
+                // 将敏感词库加入到HashMap中
+                addSensitiveWordToHashMap(readWordFile("/blacklist.txt"), false);
+                // 将非敏感词库也加入到HashMap中
+                addSensitiveWordToHashMap(readWordFile("/whitelist.txt"), true);
+            }
+            init = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return sensitiveWordMap;
+    }
+
+    /**
+     * 在线更新敏感词库
+     *
+     * @param keyWordSet  敏感词列表
+     * @param isWhiteWord 是否白名单 true 白名单 false 黑名单
+     */
+    public void addSensitiveWordOnline(Iterable<String> keyWordSet, boolean isWhiteWord) {
+        addSensitiveWordToHashMap(keyWordSet, isWhiteWord);
     }
 
     /**
@@ -37,16 +70,11 @@ public class WordContext {
      * isEnd = 1 人 = {isEnd = 0 民 = {isEnd = 1} } 男 = { isEnd = 0 人 = { isEnd = 1 }
      * } } } 五 = { isEnd = 0 星 = { isEnd = 0 红 = { isEnd = 0 旗 = { isEnd = 1 } } } }
      */
-    private void addSensitiveWordToHashMap(Set<String> keyWordSet, boolean isWhiteWord) {
-        if (sensitiveWordMap == null) {
-            sensitiveWordMap = new HashMap(keyWordSet.size()); // 初始化敏感词容器，减少扩容操作
-        }
-        String key;
+    private void addSensitiveWordToHashMap(Iterable<String> keyWordSet, boolean isWhiteWord) {
         Map nowMap;
         Map<String, String> newWorMap;
         // 迭代keyWordSet
-        for (String aKeyWordSet : keyWordSet) {
-            key = aKeyWordSet; // 关键字
+        for (String key : keyWordSet) {
             nowMap = sensitiveWordMap;
             for (int i = 0; i < key.length(); i++) {
                 char keyChar = key.charAt(i); // 转换成char型
