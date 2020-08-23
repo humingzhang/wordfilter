@@ -11,7 +11,7 @@ import java.util.List;
 public class AppTest {
 
     /**
-     * 测试替换过滤池
+     * 测试替换敏感词
      */
     @Test
     public void replace() {
@@ -32,7 +32,7 @@ public class AppTest {
     }
 
     /**
-     * 测试是否包含过滤池
+     * 测试是否包含敏感词
      */
     @Test
     public void include() {
@@ -49,7 +49,7 @@ public class AppTest {
     }
 
     /**
-     * 获取过滤词数
+     * 获取敏感词数
      */
     @Test
     public void wordCount() {
@@ -66,7 +66,7 @@ public class AppTest {
     }
 
     /**
-     * 获取过滤词列表
+     * 获取敏感词列表
      */
     @Test
     public void wordList() {
