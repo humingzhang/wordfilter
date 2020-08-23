@@ -16,7 +16,7 @@ public class AppTest {
     public void replace() {
         {
             String text   = "我们决定紧急征调5000人前往宅区帮助灾民，并且决定为紧急事件打开绿灯";
-            String result = WordFilter.replace(text, 0, '*');
+            String result = WordFilter.replace(text);
             System.out.println(result);		//我们决定**征调5000人前往宅区帮助灾民，并且决定为紧急事件打开绿灯
         }
         {
@@ -33,7 +33,7 @@ public class AppTest {
     public void include() {
         {
             String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
-            boolean result = WordFilter.include(text, 0);
+            boolean result = WordFilter.include(text);
             System.out.println(result);        //true
         }
         {
@@ -50,7 +50,7 @@ public class AppTest {
     public void wordCount() {
         {
             String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
-            int result = WordFilter.wordCount(text, 0);
+            int result = WordFilter.wordCount(text);
             System.out.println(result);        //1
         }
         {
@@ -67,7 +67,7 @@ public class AppTest {
     public void wordList() {
         {
             String text   = "我小时候有个朋友叫张三，现在和他几乎没联系了";
-            List<String> words = WordFilter.wordList(text, 0);
+            List<String> words = WordFilter.wordList(text);
             System.out.println(words);        //[张三]
         }
         {

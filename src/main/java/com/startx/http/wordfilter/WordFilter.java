@@ -20,6 +20,25 @@ public class WordFilter {
     /**
      * 替换敏感词
      *
+     * @param text 输入文本
+     */
+    public static String replace(final String text) {
+        return replace(text, 0, '*');
+    }
+
+    /**
+     * 替换敏感词
+     *
+     * @param text   输入文本
+     * @param symbol 替换符号
+     */
+    public static String replace(final String text, final char symbol) {
+        return replace(text, 0, symbol);
+    }
+
+    /**
+     * 替换敏感词
+     *
      * @param text     输入文本
      * @param distance 文本距离
      * @param symbol   替换符号
@@ -35,6 +54,15 @@ public class WordFilter {
             }
         }
         return new String(charset);
+    }
+
+    /**
+     * 是否包含敏感词
+     *
+     * @param text 输入文本
+     */
+    public static boolean include(final String text) {
+        return include(text, 0);
     }
 
     /**
@@ -58,6 +86,15 @@ public class WordFilter {
     /**
      * 获取敏感词数量
      *
+     * @param text 输入文本
+     */
+    public static int wordCount(final String text) {
+        return wordCount(text, 0);
+    }
+
+    /**
+     * 获取敏感词数量
+     *
      * @param text     输入文本
      * @param distance 文本距离
      */
@@ -71,6 +108,15 @@ public class WordFilter {
             }
         }
         return count;
+    }
+
+    /**
+     * 获取敏感词列表
+     *
+     * @param text 输入文本
+     */
+    public static List<String> wordList(final String text) {
+        return wordList(text, 0);
     }
 
     /**
