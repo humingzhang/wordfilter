@@ -122,15 +122,16 @@ public class WordFilter {
                 index.add(i);
             } else {
                 count++;
-                if(flag) {
+                if (flag && count > distance) {
                     break;
                 }
             }
             if ("1".equals(nowMap.get("isEnd"))) {
                 flag = true;
             }
-            if("1".equals(nowMap.get("isWhiteWord"))) {
+            if ("1".equals(nowMap.get("isWhiteWord"))) {
                 flag = false;
+                break;
             }
         }
 
