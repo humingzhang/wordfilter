@@ -99,21 +99,21 @@ public class WordFilter {
     /**
      * 获取标记索引
      *
-     * @param charest  输入文本
+     * @param charset  输入文本
      * @param begin    检测起始
-     * @param distence 文本距离
+     * @param distance 文本距离
      */
-    private static FlagIndex getFlagIndex(final char[] charest, final int begin, final int distence) {
+    private static FlagIndex getFlagIndex(final char[] charset, final int begin, final int distance) {
         FlagIndex fi = new FlagIndex();
 
         Map nowMap = sensitiveWordMap;
         boolean flag = false;
         int count = 0;
         List<Integer> index = new ArrayList<>();
-        for (int i = begin; i < charest.length; i++) {
-            char word = charest[i];
+        for (int i = begin; i < charset.length; i++) {
+            char word = charset[i];
             Map mapTree = (Map) nowMap.get(word);
-            if (count > distence || (i == begin && Objects.isNull(mapTree))) {
+            if (count > distance || (i == begin && Objects.isNull(mapTree))) {
                 break;
             }
             if (!Objects.isNull(mapTree)) {
