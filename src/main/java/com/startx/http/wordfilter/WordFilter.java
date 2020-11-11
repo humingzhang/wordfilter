@@ -6,23 +6,31 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 敏感词过滤
+ * 敏感词过滤器
  *
  * @author minghu.zhang
  */
 @SuppressWarnings("rawtypes")
 public class WordFilter {
+
     /**
-     * 初始化敏感词库
+     * 敏感词表
      */
-    private static Map sensitiveWordMap = WordContext.getInstance().initKeyWord();
+    private final Map wordMap;
+
+    /**
+     * 构造函数
+     */
+    public WordFilter(WordContext context) {
+        this.wordMap = context.getWordMap();
+    }
 
     /**
      * 替换敏感词
      *
      * @param text 输入文本
      */
-    public static String replace(final String text) {
+    public String replace(final String text) {
         return replace(text, 0, '*');
     }
 
@@ -32,21 +40,21 @@ public class WordFilter {
      * @param text   输入文本
      * @param symbol 替换符号
      */
-    public static String replace(final String text, final char symbol) {
+    public String replace(final String text, final char symbol) {
         return replace(text, 0, symbol);
     }
 
     /**
      * 替换敏感词
      *
-     * @param text     输入文本
-     * @param distance 文本距离
-     * @param symbol   替换符号
+     * @param text   输入文本
+     * @param skip   文本距离
+     * @param symbol 替换符号
      */
-    public static String replace(final String text, final int distance, final char symbol) {
+    public String replace(final String text, final int skip, final char symbol) {
         char[] charset = text.toCharArray();
         for (int i = 0; i < charset.length; i++) {
-            FlagIndex fi = getFlagIndex(charset, i, distance);
+            FlagIndex fi = getFlagIndex(charset, i, skip);
             if (fi.isFlag()) {
                 for (int j : fi.getIndex()) {
                     charset[j] = symbol;
@@ -61,7 +69,7 @@ public class WordFilter {
      *
      * @param text 输入文本
      */
-    public static boolean include(final String text) {
+    public boolean include(final String text) {
         return include(text, 0);
     }
 
@@ -69,13 +77,13 @@ public class WordFilter {
      * 是否包含敏感词
      *
      * @param text     输入文本
-     * @param distance 文本距离
+     * @param skip 文本距离
      */
-    public static boolean include(final String text, final int distance) {
+    public boolean include(final String text, final int skip) {
         boolean flag = false;
         char[] charset = text.toCharArray();
         for (int i = 0; i < charset.length; i++) {
-            flag = getFlagIndex(charset, i, distance).isFlag();
+            flag = getFlagIndex(charset, i, skip).isFlag();
             if (flag) {
                 break;
             }
@@ -88,7 +96,7 @@ public class WordFilter {
      *
      * @param text 输入文本
      */
-    public static int wordCount(final String text) {
+    public int wordCount(final String text) {
         return wordCount(text, 0);
     }
 
@@ -96,13 +104,13 @@ public class WordFilter {
      * 获取敏感词数量
      *
      * @param text     输入文本
-     * @param distance 文本距离
+     * @param skip 文本距离
      */
-    public static int wordCount(final String text, final int distance) {
+    public int wordCount(final String text, final int skip) {
         int count = 0;
         char[] charset = text.toCharArray();
         for (int i = 0; i < charset.length; i++) {
-            FlagIndex fi = getFlagIndex(charset, i, distance);
+            FlagIndex fi = getFlagIndex(charset, i, skip);
             if (fi.isFlag()) {
                 count++;
             }
@@ -115,7 +123,7 @@ public class WordFilter {
      *
      * @param text 输入文本
      */
-    public static List<String> wordList(final String text) {
+    public List<String> wordList(final String text) {
         return wordList(text, 0);
     }
 
@@ -123,13 +131,13 @@ public class WordFilter {
      * 获取敏感词列表
      *
      * @param text     输入文本
-     * @param distance 文本距离
+     * @param skip 文本距离
      */
-    public static List<String> wordList(final String text, final int distance) {
+    public List<String> wordList(final String text, final int skip) {
         List<String> sensitives = new ArrayList<>();
         char[] charset = text.toCharArray();
         for (int i = 0; i < charset.length; i++) {
-            FlagIndex fi = getFlagIndex(charset, i, distance);
+            FlagIndex fi = getFlagIndex(charset, i, skip);
             if (fi.isFlag()) {
                 StringBuilder builder = new StringBuilder();
                 for (int j : fi.getIndex()) {
@@ -147,35 +155,35 @@ public class WordFilter {
      *
      * @param charset  输入文本
      * @param begin    检测起始
-     * @param distance 文本距离
+     * @param skip 文本距离
      */
-    private static FlagIndex getFlagIndex(final char[] charset, final int begin, final int distance) {
+    private FlagIndex getFlagIndex(final char[] charset, final int begin, final int skip) {
         FlagIndex fi = new FlagIndex();
 
-        Map nowMap = sensitiveWordMap;
+        Map current = wordMap;
         boolean flag = false;
         int count = 0;
         List<Integer> index = new ArrayList<>();
         for (int i = begin; i < charset.length; i++) {
             char word = charset[i];
-            Map mapTree = (Map) nowMap.get(word);
-            if (count > distance || (i == begin && Objects.isNull(mapTree))) {
+            Map mapTree = (Map) current.get(word);
+            if (count > skip || (i == begin && Objects.isNull(mapTree))) {
                 break;
             }
             if (Objects.nonNull(mapTree)) {
-                nowMap = mapTree;
+                current = mapTree;
                 count = 0;
                 index.add(i);
             } else {
                 count++;
-                if (flag && count > distance) {
+                if (flag && count > skip) {
                     break;
                 }
             }
-            if ("1".equals(nowMap.get("isEnd"))) {
+            if ("1".equals(current.get("isEnd"))) {
                 flag = true;
             }
-            if ("1".equals(nowMap.get("isWhiteWord"))) {
+            if ("1".equals(current.get("isWhiteWord"))) {
                 flag = false;
                 break;
             }
